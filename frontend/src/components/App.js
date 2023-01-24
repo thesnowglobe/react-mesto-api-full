@@ -59,21 +59,23 @@ const App = () => {
   };
 
   useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInititalCards()])
-      .then(([user, cards]) => {
-        setCurrentUser(user);
-        setCards(cards);
-      })
-      .catch(err => console.log(`Error: ${err}`));
-  }, []);
+    if (loggedIn) {
+      Promise.all([api.getUserInfo(), api.getInititalCards()])
+        .then(([user, cards]) => {
+          setCurrentUser(user);
+          setCards(cards);
+        })
+        .catch(err => console.log(`Error: ${err}`));
+      }
+  }, [loggedIn]);
 
   const tokenCheck = () => {
     const token = localStorage.getItem('jwt');
     if (token) {
       auth.getContent(token)
-        .then((data) => {
-          if (data) {
-            setUserData({ email: data.data.email});
+        .then((res) => {
+          if (res) {
+            setUserData(res.email);
             setLoggedIn(true);
             history.push('/');
           }
@@ -160,7 +162,7 @@ const App = () => {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(id => id === currentUser._id);
     api.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
