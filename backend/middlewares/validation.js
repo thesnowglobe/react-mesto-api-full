@@ -33,7 +33,7 @@ module.exports.userDataValidation = celebrate({
 
 module.exports.userAvatarValidation = celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().pattern(regex, 'URL'),
+    avatar: Joi.string().pattern(regex, 'URL').required(),
   }),
 });
 

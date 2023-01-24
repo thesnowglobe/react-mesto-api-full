@@ -20,7 +20,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [isRegistered, setIsRegistered] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [userEmail, setUserEmail] = useState('');
 
   const history = useHistory();
 
@@ -75,7 +75,7 @@ const App = () => {
       auth.getContent(token)
         .then((res) => {
           if (res) {
-            setUserData(res.email);
+            setUserEmail(res.email);
             setLoggedIn(true);
             history.push('/');
           }
@@ -119,7 +119,7 @@ const App = () => {
       .then((data) => {
         setLoggedIn(true);
         localStorage.setItem('jwt', data.token);
-        setUserData({ email: email });
+        tokenCheck();
         history.push('/');
       })
       .catch((err) => {
@@ -207,7 +207,7 @@ const App = () => {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page__content'>
         <Header
-          email={currentUser.email}
+          userEmail={userEmail}
           onSignOut={handleSignOut}
         />
 

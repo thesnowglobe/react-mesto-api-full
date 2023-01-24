@@ -4,7 +4,7 @@ import logo from '../images/logo.svg';
 const Header = (props) => {
   const {
     onSignOut,
-    email,
+    userEmail,
   } = props
 
   return (
@@ -13,7 +13,7 @@ const Header = (props) => {
       <Switch>
         <Route exact path='/'>
           <div className='header__group'>
-            <p className='header__email'>{email}</p>
+            <p className='header__email'>{userEmail}</p>
             <Link to='/sign-in' className='header__btn' onClick={onSignOut}>
               Выйти
             </Link>
