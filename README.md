@@ -3,6 +3,6 @@
   
 ### Resources
 
-- IP IP 84.201.167.84
+- IP 84.201.167.84
 - Frontend https://aly0mesto.nomoredomains.rocks
 - Backend https://mestoaly0.nomoredomains.rocks
