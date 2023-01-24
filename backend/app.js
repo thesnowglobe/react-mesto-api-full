@@ -12,6 +12,7 @@ const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const { signUpValidation, signInValidation } = require('./middlewares/validation');
 const errorHandler = require('./middlewares/errorHandler');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -29,12 +30,14 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
+app.use(requestLogger);
 app.post('/signin', signInValidation, login);
 app.post('/signup', signUpValidation, createUser);
 
 app.use('/users', auth, usersRoutes);
 app.use('/cards', auth, cardsRoutes);
 app.use('*', auth, notFoundRoute);
+app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
