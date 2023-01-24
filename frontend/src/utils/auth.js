@@ -1,4 +1,5 @@
-export const BASE_URL = 'http://localhost:3000';
+// export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'https://mestoaly0.nomoredomains.rocks';
 
 export const handleResponse = (res) => {
   if (res.ok) {
