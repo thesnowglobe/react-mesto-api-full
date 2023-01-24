@@ -2,7 +2,11 @@ import { Link, Switch, Route } from 'react-router-dom';
 import logo from '../images/logo.svg';
 
 const Header = (props) => {
-  let {email} = props.userData;
+  const {
+    onSignOut,
+    email,
+  } = props
+
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt={"Mesto"}/>
@@ -10,7 +14,7 @@ const Header = (props) => {
         <Route exact path='/'>
           <div className='header__group'>
             <p className='header__email'>{email}</p>
-            <Link to='/sign-in' className='header__btn' onClick={props.onSignOut}>
+            <Link to='/sign-in' className='header__btn' onClick={onSignOut}>
               Выйти
             </Link>
           </div>

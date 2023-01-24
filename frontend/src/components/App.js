@@ -207,7 +207,7 @@ const App = () => {
     <CurrentUserContext.Provider value={currentUser}>
       <div className='page__content'>
         <Header
-          userData={userData}
+          email={currentUser.email}
           onSignOut={handleSignOut}
         />
 
